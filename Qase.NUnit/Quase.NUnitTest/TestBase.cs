@@ -17,9 +17,9 @@ namespace Quase.NUnitTest
     private TestContext _fixtureContext;
     private QaseAPI  _qaseAPI;
     public IConfiguration _configuration { get; set; }
-    private string _code;
+    private string _code, _title;
     private bool IgnoreAddResults = false;
-    private int /*_projectIdInt, _suiteIdInt,*/ _caseId;
+    private int _caseId;
     private List<AddTestRunResultRequest> _resultsForCases;
     public IWebDriver Driver { get; set; }
 
@@ -50,10 +50,11 @@ namespace Quase.NUnitTest
         {
           var cases = new List<int>();
           cases.Add(_caseId);
+          
 
           var runId = _qaseAPI.CreateNewTestRunAsync(_code, new CreateTestRunRequest 
           {
-            Title = "Test.Net",
+            Title = _title,
             Cases = cases
           }).Result
           .Result.Id;
@@ -74,6 +75,7 @@ namespace Quase.NUnitTest
     {
       if (!IgnoreAddResults)
       {
+        _title = TestContext.CurrentContext.Test.Properties.Get("title")?.ToString();
         var _caseid = 0;
         var caseid = TestContext.CurrentContext.Test.Properties.Get("caseid")?.ToString();
         if (Int32.TryParse(caseid, out _caseId))

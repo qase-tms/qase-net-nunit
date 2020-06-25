@@ -12,6 +12,7 @@ namespace Quase.NUnitTest
   public class QaseTest1 : Hooks
   {
     [Test, Property("caseid", "1")] //your case id here
+    [Property("title", "Google")] //your title test
     public void GoogleTest()
     {
       Driver.Navigate().GoToUrl("http://www.google.com");
@@ -22,7 +23,8 @@ namespace Quase.NUnitTest
       Assert.That(Driver.PageSource.Contains("Selenium"), Is.EqualTo(true), "The text selenium doest not exist");
     }
 
-    [Test, Property("caseid", "1")]
+    [Test, Property("caseid", "1")] //your case id here
+    [Property("title", "Executeautomation")] //your title test
     public void ExecuteAutomationTest()
     {
       Driver.Navigate().GoToUrl("http://executeautomation.com/demosite/Login.html");
