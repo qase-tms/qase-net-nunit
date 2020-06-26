@@ -1,7 +1,7 @@
 # qase-net-nunit
 # [Qase TMS](https://qase.io) NUnit Test
 
-## Configuration
+### Configuration
 
 appsettings.json configuration:
 
@@ -12,106 +12,44 @@ appsettings.json configuration:
 }
 ```
 
-## Initialization Qase
+### Usage
 
-```C#
-private void InitQase()
+Inherit from the TestBase class in each of your test classes.
+ 
+```
+public class MyTests : TestBase
 {
-    var configurationBuilder = new ConfigurationBuilder();
-    var path = Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json");
-    _configuration = configurationBuilder.AddJsonFile(path, false).Build();
-
-    var urlAPI = _configuration["UrlAPI"];
-    var apiToken = _configuration["Api_Token"];
-
-    if (string.IsNullOrEmpty(urlAPI)) throw new Exception("Invalid qase url");
-    if (string.IsNullOrEmpty(apiToken)) throw new Exception("Invalid qase api token");
-
-   _qaseAPI = new QaseAPI(urlAPI, apiToken);
+  ...
 }
 ```
 
+In your test class include the Qase project code [coded].
 
-## Result test
-
-```C#
-[TearDown]
-public void Cleanup()
-{
-    if (!IgnoreAddResults)
-    {
-        _title = TestContext.CurrentContext.Test.Properties.Get("title")?.ToString();
-        var _caseid = 0;
-        var caseid = TestContext.CurrentContext.Test.Properties.Get("caseid")?.ToString();
-        if (Int32.TryParse(caseid, out _caseId))
-        {
-          var result = new AddTestRunResultRequest { CaseId = _caseId,  Comment = TestContext.CurrentContext.Result.Message };
-          var resultState = TestContext.CurrentContext.Result.Outcome;
-
-          if (resultState == ResultState.Success) result.Status = StatusTestRunResult.passed.ToString();
-          else if (resultState == ResultState.Inconclusive) result.Status = StatusTestRunResult.blocked.ToString();
-          else result.Status = StatusTestRunResult.failed.ToString();
-
-          _resultsForCases.Add(result);
-        }
-     }
-}
 ```
-
-## Test Report
-
-```C#
-[OneTimeTearDown]
-public void FixtureTearDown()
-{
-  if (!IgnoreAddResults)
-  {
-     if (_resultsForCases.Count > 0)
-     {
-        var cases = new List<int>();
-        cases.Add(_caseId);
-          
-
-        var runId = _qaseAPI.CreateNewTestRunAsync(_code, new CreateTestRunRequest 
-        {
-            Title = _title,
-            Cases = cases
-        }).Result.Result.Id;
-
-        if (runId > 0)
-        {
-          foreach (var result in _resultsForCases)
-          {
-              var hash = _qaseAPI.AddTestRunResultAsync(_code, runId, result).Result.Result.Hash;
-          }
-        }
-     }
-  }
-}
-```
-
-## Example Test
-
-```C#
 [Property("code", "your project code here")]
-  public class QaseTest1 : Hooks
-  {
-    [Test, Property("caseid", "your case id here")]
-    [Property("title", "your title test")]
-    public void GoogleTest()
-    {
-      Driver.Navigate().GoToUrl("http://www.google.com");
-      Driver.FindElement(By.Name("q")).SendKeys("Selenium");
-      System.Threading.Thread.Sleep(5000);
-      Driver.FindElement(By.Name("btnK")).Click();
-      Assert.AreEqual(true, Driver.FindElement(By.Id("btnN")).Displayed);
-      Assert.That(Driver.PageSource.Contains("Selenium"), Is.EqualTo(true), "The text selenium doest not exist");
-    }
-  }
+public class MyTests : TestBase
+{
+  ...
 }
 ```
 
-## Running tests with test explorer
+Include the Qase case id [caseid] and titel test [title] as a property to the test method. The steps contained in the test method should map to the test steps in the Qase test case.
 
-https://docs.microsoft.com/en-us/visualstudio/test/run-unit-tests-with-test-explorer?view=vs-2019
+```
+[Test, Property("caseid", "your case id here")]
+[Property("title", "your title test")]
+public void GoogleTest()
+{
+  ..
+}
+```
 
+Execute the tests in your test class. 
+Open the project in Qase and view the test runs. 
+The results were updated by executing the NUnit tests.
+
+#### Properties empty when using parameterized test in NUnit
+- Please see https://stackoverflow.com/questions/47434571/nunit-test-properties-not-accessible-in-parametrized-tests
+
+### For a detailed description of the QaseAPI library methods
+- Please see https://github.com/qase-tms/qase-net-api
