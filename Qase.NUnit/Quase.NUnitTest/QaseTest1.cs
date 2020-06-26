@@ -8,11 +8,11 @@ using System.Text;
 namespace Quase.NUnitTest
 {
 
-  [Property("code", "TEST")]//your project code here
+  [Property("code", "your project code here")]
   public class QaseTest1 : Hooks
   {
-    [Test, Property("caseid", "1")] //your case id here
-    [Property("title", "Google")] //your title test
+    [Test, Property("caseid", "your case id here")]
+    [Property("title", "your title test")]
     public void GoogleTest()
     {
       Driver.Navigate().GoToUrl("http://www.google.com");
