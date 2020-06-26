@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30104.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quase.NUnitTest", "Quase.NUnitTest\Quase.NUnitTest.csproj", "{A3B2956F-783B-4649-B9DE-A786785B87B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quase.NUnitTest", "Quase.NUnitTest\Quase.NUnitTest.csproj", "{A3B2956F-783B-4649-B9DE-A786785B87B2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Qase", "Qase", "{94B689C1-0E40-4A61-A94F-7B14D9A7CBC3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qase.API", "..\..\qase-net-api\Qase.API\Qase.API.csproj", "{1F4B6436-5E68-439B-ADFB-65C0505C7C54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qase.API", "..\Qase.API\Qase.API.csproj", "{34C1F69B-4980-43EE-A6CB-07527536D235}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,16 +19,16 @@ Global
 		{A3B2956F-783B-4649-B9DE-A786785B87B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3B2956F-783B-4649-B9DE-A786785B87B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3B2956F-783B-4649-B9DE-A786785B87B2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1F4B6436-5E68-439B-ADFB-65C0505C7C54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1F4B6436-5E68-439B-ADFB-65C0505C7C54}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1F4B6436-5E68-439B-ADFB-65C0505C7C54}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1F4B6436-5E68-439B-ADFB-65C0505C7C54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34C1F69B-4980-43EE-A6CB-07527536D235}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34C1F69B-4980-43EE-A6CB-07527536D235}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34C1F69B-4980-43EE-A6CB-07527536D235}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34C1F69B-4980-43EE-A6CB-07527536D235}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{1F4B6436-5E68-439B-ADFB-65C0505C7C54} = {94B689C1-0E40-4A61-A94F-7B14D9A7CBC3}
+		{34C1F69B-4980-43EE-A6CB-07527536D235} = {94B689C1-0E40-4A61-A94F-7B14D9A7CBC3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1A7AAA63-B208-4A60-94C0-EBDC0F034C77}
