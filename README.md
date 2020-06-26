@@ -1,5 +1,5 @@
 # qase-net-nunit
-# [Qase TMS](https://qase.io) NUnit
+# [Qase TMS](https://qase.io) NUnit Test
 
 ## Configuration
 
